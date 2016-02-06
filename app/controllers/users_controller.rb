@@ -4,7 +4,8 @@ class UsersController < ApplicationController
                                                         #  signed_in_user
   before_action :correct_user,   only: [:edit, :update] # Листинг 9.14. Предфильтр 
                                                         #correct_user для защиты edit/update 
-  before_action :admin_user,     only: :destroy                                                      
+  before_action :admin_user,     only: :destroy  
+                                                     
   
   # Листинг 9.22. Действие index контроллера Users.
   def index
@@ -71,10 +72,6 @@ class UsersController < ApplicationController
     def correct_user
       @user = User.find(params[:id])
       redirect_to(root_url) unless current_user?(@user)
-    end
-
-    def admin_user
-      redirect_to(root_url) unless current_user.admin?
     end
 
     def admin_user
